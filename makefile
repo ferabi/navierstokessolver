@@ -21,7 +21,7 @@ CFLAGS = -std=c++11 -Iheaders
 
 #SRCS = $(SRC_DIR)/heat1d.cpp  $(SRC_DIR)/heat2d.cpp  $(SRC_DIR)/testing.cpp 
 
-OBJS = $(OBJ_DIR)/heat1d.o $(OBJ_DIR)/heat2d.o $(OBJ_DIR)/testing.o
+OBJS = $(OBJ_DIR)/heat1d.o $(OBJ_DIR)/heat2d.o $(OBJ_DIR)/testing.o $(OBJ_DIR)/advecdiff1d.o
 
 $(OBJ_DIR)/%.o : $(SRC_DIR)/%.cpp | $(OBJ_DIR)
 	$(CC) $(CFLAGS) -c -o $@ $<

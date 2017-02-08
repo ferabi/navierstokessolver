@@ -7,9 +7,11 @@
 #ifndef M_PI
 #define M_PI (3.14159265358979323846)
 #endif
-class Heat1D
+class AdvecDiff1D
 {
     protected :
+        //advection velocity
+        double ad_vel;
         //diffusion coefficient = alpha
         double alpha; 
         //number of points per dimension
@@ -21,14 +23,12 @@ class Heat1D
     
     public:
         //constructor takes three arguments
-        Heat1D(const double in_alpha,const unsigned int in_m, const double in_dt);
+        AdvecDiff1D(const double ad_vel, const double in_alpha, const unsigned int in_m, const double in_dt);
 
         //exact solution at time t
-        Vector<double> exact(double in_time) const;
+        //Vector<double> exact(double in_time) const;
 
         //numerical solution at time t_end
         Vector<double> solve(double time_end) const;
 };
-
-
 

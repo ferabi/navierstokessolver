@@ -3,6 +3,7 @@
 #include "matrix.h"
 #include "heat2d.h"
 #include <fstream>
+#include "advecdiff1d.h"
 
 int main()
 {
@@ -52,7 +53,7 @@ int main()
     
 		std::cout << x << std::endl;
     
-		//A[{1,1}] = 4;
+	//A[{1,1}] = 4;
     //A[{1,2}] = 2;
     //A[{2,0}] = 1;
     //A[{2,1}] = 2;
@@ -60,32 +61,32 @@ int main()
    
     float tol = 1e-10;
     
-		unsigned int max = 100;
+	unsigned int max = 100;
     
-		int j = cg(A, b, x, tol, max);
+	int j = cg(A, b, x, tol, max);
     
-		//Vector<float> f =  x * tol;
+	//Vector<float> f =  x * tol;
     std::cout << x[0]<< std::endl;
     std::cout << x[1]<< std::endl;
     
-		//std::cout << x[2]<< std::endl;
+	//std::cout << x[2]<< std::endl;
     std::cout << j << std::endl;
     //Matrix<float> i(3);
     //i(3);
     std::ofstream data;
-    Heat2D heat_sol(0.3125, 3,0.1);
-    Vector<double> v =heat_sol.solve(0.5);
+    AdvecDiff1D ad_sol(0.9, 0.3125, 99, 0.001);
+    Vector<double> v = ad_sol.solve(0.1);
     
-		data.open("plots/datasolve.txt");
+	data.open("plots/datasolve.txt");
     std::cout  << "from numerical solving:" << std::endl;
     data << v << std::endl;
     data.close();
     
-		Vector<double> g = heat_sol.exact(0.5);
-    std::cout << "from exact solution" << std::endl;
-    data.open("plots/dataexact.txt");
-    data << g << std::endl;
-    data.close();
+//	Vector<double> g = ad_sol.exact(0.5);
+//    std::cout << "from exact solution" << std::endl;
+//    data.open("plots/dataexact.txt");
+//    data << g << std::endl;
+//    data.close();
     //std::cout << remainder(1,0.1) << std::endl;
     return 0;
 
