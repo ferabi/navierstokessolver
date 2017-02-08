@@ -74,7 +74,7 @@ int main()
     //Matrix<float> i(3);
     //i(3);
     std::ofstream data;
-    AdvecDiff1D ad_sol(0.9, 0.3125, 99, 0.001);
+    AdvecDiff1D ad_sol(-0.5, 0, 99, 0.001);
     Vector<double> v = ad_sol.solve(0.1);
     
 	data.open("plots/datasolve.txt");

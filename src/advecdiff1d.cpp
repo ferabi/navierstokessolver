@@ -32,16 +32,19 @@ inline double diff_op(const unsigned int i, const unsigned int j)
     }
 }
 
-inline Vector<double> initial_solvec(const unsigned int points)
+inline Vector<double> initial_solvec_advec(const unsigned int points)
 {
     Vector<double> result(points);
 
     double dx = 1.0 /(points + 1.0);
     double x;
+    double theta;
+    
     for (auto i = 0; i < points; i++)
     {
         x = dx * (i+1);
-        result[i] = sin(M_PI * x);
+        theta = M_PI * x/2;
+        result[i] = 22;
     }
 
     return result;
@@ -55,7 +58,9 @@ AdvecDiff1D::AdvecDiff1D(const double in_ad_vel, const double in_alpha,const uns
 {
     //initialisiing the iteration matrix
     double dx = 1.0 / ( this->m + 1.0 );
+    
     double dxsquared = dx * dx;
+    
     double expr;
 
     for (auto i = 0; i < m; i++)
@@ -108,7 +113,7 @@ Vector<double> AdvecDiff1D::solve(double time_end) const
     }
  
     //initial solution vector w_l when l=0 i.e. w_0
-    Vector<double> w_l = initial_solvec(m);
+    Vector<double> w_l = initial_solvec_advec(m);
 
     //make the solution vector w_(l+1)
     Vector<double> w_l1 = w_l;
