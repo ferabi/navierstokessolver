@@ -34,17 +34,20 @@ inline double diff_op(const unsigned int i, const unsigned int j)
 
 inline Vector<double> initial_solvec_advec(const unsigned int points)
 {
+    //points include the ghost points
     Vector<double> result(points);
 
-    double dx = 1.0 /(points + 1.0);
+    double dx = 1.0 /(points - 1.0);
     double x;
     double theta;
     
     for (auto i = 0; i < points; i++)
     {
-        x = dx * (i+1);
-        theta = M_PI * x/2;
-        result[i] = 22;
+        x = dx * (i);
+        
+        theta = M_PI * x;//-200 * pow((x - 0.25), 2);
+        
+        result[i] = sin(theta);//exp(theta);
     }
 
     return result;
@@ -57,7 +60,7 @@ AdvecDiff1D::AdvecDiff1D(const double in_ad_vel, const double in_alpha,const uns
     ad_vel(in_ad_vel), alpha(in_alpha), m(in_m), dt(in_dt), M(in_m)
 {
     //initialisiing the iteration matrix
-    double dx = 1.0 / ( this->m + 1.0 );
+    double dx = 1.0 / ( this->m - 1.0 );
     
     double dxsquared = dx * dx;
     
@@ -79,8 +82,10 @@ AdvecDiff1D::AdvecDiff1D(const double in_ad_vel, const double in_alpha,const uns
             }
         }
     }
-		
-	//output of the matrix built
+    //M[{0,198}] = 1 + ad_vel* dt/(2.0*dx);
+    //M[{98,0}] = 1 + ad_vel* dt/(2.0*dx);
+    
+    //output of the matrix built
     //std::cout << M << std::endl;
 }
 

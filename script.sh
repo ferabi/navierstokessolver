@@ -6,8 +6,8 @@ echo "running the executable"
 ./executables/testing
 echo "making plots"
 cd plots/
-python plot.py
+python plot_surface.py
 echo "showing the plots"
-display calc_sol.png
+open calc_sol.png
 cd ..
 

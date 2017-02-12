@@ -4,7 +4,7 @@
 #include "heat2d.h"
 #include <fstream>
 #include "advecdiff1d.h"
-
+#include "advecdiff2d.h"
 int main()
 {
     /*
@@ -51,7 +51,7 @@ int main()
     
 		x = matvec(A,b);
     
-		std::cout << x << std::endl;
+		std::cout << A[{0,0}] << std::endl;
     
 	//A[{1,1}] = 4;
     //A[{1,2}] = 2;
@@ -63,19 +63,19 @@ int main()
     
 	unsigned int max = 100;
     
-	int j = cg(A, b, x, tol, max);
-    
+	//int j = cg(A, b, x, tol, max);
+    A[{0,0}] = 66;
 	//Vector<float> f =  x * tol;
-    std::cout << x[0]<< std::endl;
+    std::cout << A[{0,0}]<< std::endl;
     std::cout << x[1]<< std::endl;
     
 	//std::cout << x[2]<< std::endl;
-    std::cout << j << std::endl;
+    //std::cout << j << std::endl;
     //Matrix<float> i(3);
     //i(3);
     std::ofstream data;
-    AdvecDiff1D ad_sol(-0.5, 0, 99, 0.001);
-    Vector<double> v = ad_sol.solve(0.1);
+    AdvecDiff2D ad_sol(-1,-1, 0.3125, 99, 0.00001);
+    Vector<double> v = ad_sol.solve(0.001);
     
 	data.open("plots/datasolve.txt");
     std::cout  << "from numerical solving:" << std::endl;
